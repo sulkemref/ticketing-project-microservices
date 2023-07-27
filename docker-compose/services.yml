@@ -20,7 +20,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  user-service:
+  user-service-1:
     image: ${GROUP_ID}/user-service:${SERVICE_VERSION:-latest}
     environment:
       - "PROFILE=dev"
@@ -32,7 +32,7 @@ services:
       - "9090:9090"
     networks:
       - backend
-  user-service-1:
+  user-service-2:
     image: ${GROUP_ID}/user-service:${SERVICE_VERSION:-latest}
     environment:
       - "PROFILE=dev"
@@ -44,7 +44,7 @@ services:
       - "9080:9080"
     networks:
       - backend
-  project-service:
+  project-service-1:
     image: ${GROUP_ID}/project-service:${SERVICE_VERSION:-latest}
     environment:
       - "PROFILE=dev"
@@ -56,7 +56,7 @@ services:
       - "9091:9091"
     networks:
       - backend
-  task-service:
+  task-service-1:
     image: ${GROUP_ID}/task-service:${SERVICE_VERSION:-latest}
     environment:
       - "PROFILE=dev"
@@ -72,6 +72,18 @@ services:
     image: ${GROUP_ID}/discovery-service:${SERVICE_VERSION:-latest}
     ports:
       - "8761:8761"
+    networks:
+      - backend
+  gateway-service:
+    image: ${GROUP_ID}/gateway-service:${SERVICE_VERSION:-latest}
+    ports:
+      - "8762:8762"
+    depends_on:
+      - discovery-service
+      - user-service-1
+      - user-service-2
+      - project-service-1
+      - task-service-1
     networks:
       - backend
 networks:
