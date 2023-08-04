@@ -10,8 +10,11 @@ spring:
           uri: https://github.com/sulkemref/ticketing-project-microservices-config
           default-label: main
           username: sulkemref
-          password: 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
+          password: '{cipher}359f31cf43ef776a38f0c152406bf3e309bca47d0023dcc7615ab3377258d37ddd862e4a37d86c0a0ebddb8872fbf55f376ac234c4035588c4b4970e978561e7'
       fail-fast: true
+
+encrypt:
+  key: cydeo
 
 server:
   port: 8888
