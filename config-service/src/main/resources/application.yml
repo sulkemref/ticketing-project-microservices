@@ -2,12 +2,16 @@ spring:
   application:
     name: config-server
   profiles:
-    active: native
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/config
+        git:
+          uri: https://github.com/sulkemref/ticketing-project-microservices-config
+          default-label: main
+          username: sulkemref
+          password: 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
+      fail-fast: true
 
 server:
   port: 8888
