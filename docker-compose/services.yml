@@ -32,18 +32,6 @@ services:
       - "9093:9093"
     networks:
       - backend
-  user-service-2:
-    image: ${GROUP_ID}/user-service:${SERVICE_VERSION:-latest}
-    environment:
-      - "PROFILE=dev"
-      - "JAVA_OPTS:-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5007 -Xms128m -Xmx256m"
-    depends_on:
-      database:
-        condition: service_healthy
-    ports:
-      - "9080:9080"
-    networks:
-      - backend
   project-service-1:
     image: ${GROUP_ID}/project-service:${SERVICE_VERSION:-latest}
     environment:
@@ -81,7 +69,6 @@ services:
     depends_on:
       - discovery-service
       - user-service-1
-      - user-service-2
       - project-service-1
       - task-service-1
     networks:
@@ -109,7 +96,7 @@ services:
     container_name: grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
-      - DF_SECURITY_ADMIN_PASSWORD=abc1
+      - GF_SECURITY_ADMIN_PASSWORD=abc1
     depends_on:
       - prometheus
     networks:
