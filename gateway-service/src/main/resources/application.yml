@@ -14,7 +14,7 @@ spring:
             - Path=/cydeo/dev/user/**
           filters:
             - RewritePath=/cydeo/dev/user/(?<segment>.*),/$\{segment}
-        - id: user-service
+        - id: project-service
           uri: lb://project-service
           predicates:
             - Path=/cydeo/dev/project/**
