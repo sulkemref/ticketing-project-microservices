@@ -35,7 +35,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://host.docker.internal:8000/auth/realms/master/protocol/openid-connect/certs
+          jwk-set-uri: http://host.docker.internal:8080/auth/realms/master/protocol/openid-connect/certs
 
 server:
   port: 8762
